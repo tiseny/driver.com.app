@@ -1,5 +1,5 @@
 import '../../redux/login';
-import './index.less';
+import './login.less';
 const mui = require('../../libs/mui.min.js');
 
 const task = {

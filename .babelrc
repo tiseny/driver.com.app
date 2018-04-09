@@ -1,0 +1,14 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "safari >= 7","> 5%"],
+        "loose": true
+      }
+    }]
+  ],
+  "plugins": ["transform-runtime"],
+  "ignore": [
+    "*/mui.min.js"
+  ]
+}
