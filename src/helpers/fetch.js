@@ -1,5 +1,7 @@
+import mui from './middleware';
 import { getState } from './state';
-const mui = require('../libs/mui.min.js');
+import config from '../config';
+
 
 // 参数 序列化
 function param(paramData) {
@@ -21,7 +23,7 @@ function param(paramData) {
 // 请求地址
 function getApiPath(url, paramData) {
   const requestParams = paramData || {};
-  requestParams.t = (new Date()).getTime();
+  //requestParams.t = (new Date()).getTime();
 
   let params = param(requestParams);
 
@@ -35,7 +37,14 @@ function getApiPath(url, paramData) {
 
 function fetch(url, params, method, hasToken = true) {
 
+	const NODE_ENV = document.title || ''
+	// 如果 url 不是 http 开头, 并且是
+	if (NODE_ENV !== 'development') {
+		url = `${config.url}${url}`
+	}
+
 	url = getApiPath(url, params.header || {})
+
 	let headers = {
 		'Content-Type':'application/json'
 	}
@@ -45,10 +54,10 @@ function fetch(url, params, method, hasToken = true) {
 			"token-sign": getState('token')
 		})
 	}
-
+		
 	return new Promise((resolve, reject) => {
 		mui.ajax(url, {
-			data: params.body || {},
+			data: params.body,
 			dataType: 'json',						//服务器返回json格式数据
 			type: method,								//HTTP请求类型
 			timeout: 10000,							//超时时间设置为10秒；
@@ -61,7 +70,12 @@ function fetch(url, params, method, hasToken = true) {
 			},
 			error:function(xhr,type,errorThrown){
 				//异常处理；
-				plus.nativeUI.toast('系统异常');
+				mui._toast('系统异常');
+
+				resolve({
+					result: false,
+					data: null
+				})
 			}
 		});
 	})

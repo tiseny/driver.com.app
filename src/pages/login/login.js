@@ -1,6 +1,10 @@
+import { setState, getState } from '../../helpers/state';
+import mui from '../../helpers/middleware';
+import { pageBack } from '../../helpers/util';
 import '../../redux/login';
 import './login.less';
-const mui = require('../../libs/mui.min.js');
+
+const FORWARD_URL = './wait.html';
 
 const task = {
 	login: function() {
@@ -14,12 +18,23 @@ const task = {
 			app.login({
 				userCode: $account.value,
 				password: $password.value
-			}, json => {
+			}).then(json => {
+				mui(this).button('reset');
 				if (json.result) {
-					// 跳转到主页面
-					console.log('// 跳转到主页面')
-					// 
-					mui(this).button('reset');
+					mui._openWindow({
+					  url: FORWARD_URL,
+					  id: 'home',
+					  preload: true,
+						show: {
+							aniShow: 'pop-in'
+						},
+						styles: {
+							popGesture: 'hide'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
 				}
 			})
 		})
@@ -31,24 +46,14 @@ mui.init({
 	statusBarBackground: '#f7f7f7'
 });
 
+
 // 调用h5 plus的事件系统
-mui.ready(function() {
+mui._ready(function() {
 
 	// 登录时间
 	task.login()
 
-	// 退出
-	let backButtonPress = 0;
-	mui.back = function(event) {
-		backButtonPress++;
-		if (backButtonPress > 1) {
-			plus.runtime.quit();
-		} else {
-			plus.nativeUI.toast('再按一次退出应用');
-		}
-		setTimeout(function() {
-			backButtonPress = 0;
-		}, 1000);
-		return false;
-	};
 });
+
+
+pageBack(mui);

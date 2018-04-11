@@ -41,6 +41,10 @@ for (let key in htmlEntry) {
   } else {
     options['chunks'] = []
   }
+
+  // 重新定义 title
+  options['title'] = process.env.NODE_ENV
+
   htmlPlugins.push(
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
@@ -48,7 +52,6 @@ for (let key in htmlEntry) {
     new HtmlWebpackPlugin(options)
   )
 }
-
 
 module.exports = {
   entry: {

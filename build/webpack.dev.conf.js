@@ -1,7 +1,7 @@
 const path = require('path')
 const config = require('../config')
 const baseWebpackConfig = require('./webpack.base.conf')
-var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const webpack = require('webpack')
 const merge = require('webpack-merge')
