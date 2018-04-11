@@ -6,30 +6,13 @@
 		<title><%= htmlWebpackPlugin.options.title %></title>
 	</head>
 	<body>
-		<header class="mui-bar mui-bar-nav own-main-background-color">
-			<h1 id="nav-title" class="mui-title">待接运单</h1>
-		</header>
-		<nav class="mui-bar mui-bar-tab" id="mui-bar-tab">
-			<a class="mui-tab-item mui-active" data-action="wait">
-				<span class="mui-icon iconfont icon-daiban"></span>
-				<span class="mui-tab-label">待接运单</span>
-			</a>
-			<a class="mui-tab-item">
-				<span class="mui-icon iconfont icon-yijie" data-action="recieve"></span>
-				<span class="mui-tab-label">已接运单</span>
-			</a>
-			<a class="mui-tab-item">
-				<span class="mui-icon iconfont icon-lishi" data-action="history"></span>
-				<span class="mui-tab-label">历史运单</span>
-			</a>
-			<a class="mui-tab-item">
-				<span class="mui-icon iconfont icon-duizhangdan" data-action="fee"></span>
-				<span class="mui-tab-label">对账单</span>
-			</a>
-			<a class="mui-tab-item">
-				<span class="mui-icon iconfont icon-wode" data-action="my"></span>
-				<span class="mui-tab-label">我的</span>
-			</a>
-		</nav>
+		<div class="mui-content">
+			<div class="title">
+				<p>这是webview模式选项卡的第1个子页面</p>
+				<p>何谓webview模式？其实就是每个选项卡内容都是一个独立的webview，彼此之间互相独立、互不影响；
+					对于较为复杂的业务系统，推荐使用该模式。</p>
+				<p>基于webview模式的选项卡，支持原生加速的下拉刷新，点击第二个选项卡（“消息”），切换选项卡，体验下拉刷新；</p>
+			</div>
+		</div>
 	</body>
 </html>

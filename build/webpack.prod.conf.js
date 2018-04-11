@@ -35,7 +35,7 @@ let webpackConfig = merge(baseWebpackConfig, {
       filename: 'css/[name].[hash:8].css',
       allChunks: true
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    /*new webpack.optimize.UglifyJsPlugin({
       uglifyOptions: {
         output: {
           comments: false,  // remove all comments
@@ -51,7 +51,7 @@ let webpackConfig = merge(baseWebpackConfig, {
           except: ['$super', '$', 'exports', 'require']
         }
       }
-    }),
+    }),*/
     new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
       root: path.resolve(__dirname, '../')
     }),

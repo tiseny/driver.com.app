@@ -1,10 +1,9 @@
-import { setState, getState } from '../../helpers/state';
 import mui from '../../helpers/middleware';
 import { pageBack } from '../../helpers/util';
 import '../../redux/login';
 import './login.less';
 
-const FORWARD_URL = './wait.html';
+const FORWARD_URL = 'home.html';
 
 const task = {
 	login: function() {
@@ -21,9 +20,9 @@ const task = {
 			}).then(json => {
 				mui(this).button('reset');
 				if (json.result) {
-					mui._openWindow({
+					mui.openWindow({
 					  url: FORWARD_URL,
-					  id: 'home',
+					  id: FORWARD_URL,
 					  preload: true,
 						show: {
 							aniShow: 'pop-in'

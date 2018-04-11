@@ -1,7 +1,8 @@
 import mui from './middleware';
-import { getState } from './state';
+import { getState, clearState } from './state';
 import config from '../config';
 
+const LOGIN_URL = 'login.html'
 
 // 参数 序列化
 function param(paramData) {
@@ -63,10 +64,32 @@ function fetch(url, params, method, hasToken = true) {
 			timeout: 10000,							//超时时间设置为10秒；
 			headers: headers,	              
 			success:function(data){
-				resolve({
-					result: true,
-					data: data
-				})
+				// 如果
+				// 登录失效
+				if (data && data.Code === '000002') {
+					// 清楚所有存储的数据
+					clearState();
+
+					mui.openWindow({
+					  url: LOGIN_URL,
+					  id: LOGIN_URL,
+					  preload: true,
+						show: {
+							aniShow: 'pop-in'
+						},
+						styles: {
+							popGesture: 'hide'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				} else {
+					resolve({
+						result: true,
+						data: data
+					})	
+				}
 			},
 			error:function(xhr,type,errorThrown){
 				//异常处理；
