@@ -36,7 +36,10 @@ function getApiPath(url, paramData) {
 }
 
 
-function fetch(url, params, method, hasToken = true) {
+function fetch(url, params = {header: null, body: null}, method, hasToken = true) {
+
+	const header = params ? params.header : {}
+	const body = params ? params.body : null
 
 	const NODE_ENV = document.title || ''
 	// 如果 url 不是 http 开头, 并且是
@@ -44,7 +47,7 @@ function fetch(url, params, method, hasToken = true) {
 		url = `${config.url}${url}`
 	}
 
-	url = getApiPath(url, params.header || {})
+	url = getApiPath(url, header)
 
 	let headers = {
 		'Content-Type':'application/json'
@@ -58,7 +61,7 @@ function fetch(url, params, method, hasToken = true) {
 		
 	return new Promise((resolve, reject) => {
 		mui.ajax(url, {
-			data: params.body,
+			data: body,
 			dataType: 'json',						//服务器返回json格式数据
 			type: method,								//HTTP请求类型
 			timeout: 10000,							//超时时间设置为10秒；
