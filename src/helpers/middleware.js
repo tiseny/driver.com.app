@@ -1,21 +1,6 @@
-import { setState, getState } from './state';
+import { pageBack, watchLocation, isLogin, goLogin } from './util';
 
 const mui = require('../libs/mui.min.js');
-const BLANK_LIST = ['^/login.*', '^/register.*'];
-const LOGIN_URL = 'login.html'
-
-function isLogin() {
-	const url = window.location.pathname
-	const isValidUrl = BLANK_LIST.some(reg => new RegExp(reg).test(url))
-	// 如果是非黑名单内的url
-	// 如果不存在token. 则打回到 login.html
-	if (!getState('token') && !isValidUrl) {
-		mui.openWindow({
-		  url: LOGIN_URL,
-		  id: LOGIN_URL,
-		});
-	}
-}
 
 function middleware() {
 	// 重新定义 
@@ -47,7 +32,6 @@ function middleware() {
 	    createNew:false,				//是否重复创建同样id的webview，默认为false:不重复创建，直接显示
 	    waiting:{
 	      autoShow:true,				//自动显示等待框，默认为true
-	      title:'正在加载...',	//等待对话框上显示的提示内容
 	    }
 		}
 		Object.assign(conifg, params)
@@ -55,7 +39,10 @@ function middleware() {
 	}
 
 	// 判断是否已经登录
-	isLogin();
+	isLogin(mui);
+
+	// 定位信息
+	watchLocation(mui);
 
 	return mui
 }

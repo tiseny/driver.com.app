@@ -1,3 +1,93 @@
+import { setState, getState, clearState } from './state';
+const BLANK_LIST = ['^/login.*', '^/register.*'];
+const LOGIN_URL = 'login.html'
+
+let geoWatch = null
+
+function isLogin(mui) {
+	const url = window.location.pathname
+	const isValidUrl = BLANK_LIST.some(reg => new RegExp(reg).test(url))
+	// 如果是非黑名单内的url
+	// 如果不存在token. 则打回到 login.html
+	if (!getState('token') && !isValidUrl) {
+		mui.openWindow({
+		  url: LOGIN_URL,
+		  id: LOGIN_URL,
+		});
+	}
+}
+
+function goLogin(mui) {
+	// 清除 所有 localStorage
+	clearState()
+
+	mui.openWindow({
+		url: LOGIN_URL,
+	  id: LOGIN_URL,
+	  preload: true,
+		show: {
+			aniShow: 'pop-in'
+		},
+		styles: {
+			popGesture: 'hide'
+		},
+		waiting: {
+			autoShow: false
+		}
+	})
+
+	// 销毁页面
+	const homePage = plus.webview.getWebviewById('home.html');  
+	plus.webview.close(homePage, "none");
+}
+
+// 监听定位
+function watchLocation(mui) {
+	mui.plusReady(function() {
+		// 如果已经登录了
+		if (getState('token')) {
+			geoWatch = plus.geolocation.watchPosition(function(position) {
+	    	// coords 经纬度
+	    	const coords = {
+	    		lng: position.coords.longitude,
+	    		lat: position.coords.latitude
+	    	}
+	    	// address
+	    	//const address = `${position.address.province}${position.address.city}${position.address.district}${position.address.street}`
+	    	plus.nativeUI.toast(JSON.stringify(position))
+	    	// 清楚监听位置
+	    	plus.geolocation.clearWatch( geoWatch ); 
+	    	geoWatch = null
+	    }, function(e) {
+	      plus.nativeUI.toast("异常:" + e.message);
+	      // 清楚监听位置
+	      plus.geolocation.clearWatch( geoWatch ); 
+	    	geoWatch = null
+	    },{ provider: 'baidu' });
+		}
+    
+  });
+}
+
+// 调用系统电话
+function callPhone(number) {
+	plus.nativeUI.confirm(`拨打${number}？`,function(e) {
+		if (e.index == 0) {
+			plus.device.dial(number, true)
+		}	
+	}, "nativeUI", ["是","否"])
+}
+
+// 打开系统地图，导航
+function openMap(mui) {
+
+}
+
+// 拍照 
+function photo(mui) {
+
+}
+
 function pageBack(mui) {
 	// 退出
 	let backButtonPress = 0;
@@ -17,5 +107,11 @@ function pageBack(mui) {
 
 
 export {
-	pageBack
+	pageBack,
+	goLogin,
+	watchLocation,
+	isLogin,
+	callPhone,
+	openMap,
+	photo
 }
