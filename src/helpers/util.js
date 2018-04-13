@@ -46,7 +46,7 @@ function watchLocation(mui) {
 	mui.plusReady(function() {
 		// 如果已经登录了
 		if (getState('token')) {
-			geoWatch = plus.geolocation.watchPosition(function(position) {
+			geoWatch = plus.geolocation.getCurrentPosition(function(position) {
 	    	// coords 经纬度
 	    	const coords = {
 	    		lng: position.coords.longitude,
