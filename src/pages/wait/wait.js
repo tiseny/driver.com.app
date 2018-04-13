@@ -9,16 +9,18 @@ const template = require('../../libs/art.template');
 const task = {
 	// 获取 待解运单数据
 	fetchWaitList: () => {
+		plus.nativeUI.showWaiting('加载中...');
 		app.wait.fetchWaitList({
       orderNode: "WAITING"
 		}).then(json => {
-			// 
-			const data = {
-				list: json.data
-			}
+			plus.nativeUI.closeWaiting();
+			if (json.result) {
+				const data = {
+					list: json.data
+				}
 
-			const html = template('wait-template', data);
-			document.getElementById('wait-mui-scroll').innerHTML = html;
+				document.getElementById('wait-mui-scroll').innerHTML = template('wait-template', data);
+			}
 		})
 	}
 }
