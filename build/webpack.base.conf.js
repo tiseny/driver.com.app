@@ -57,7 +57,8 @@ module.exports = {
   entry: {
     ...entry,
     vendors: [
-      resolve('src/libs/mui.min.js')
+      resolve('src/libs/mui.min.js'),
+      resolve('src/libs/art.template.js')
     ] 
   },
   output: {

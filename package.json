@@ -41,7 +41,5 @@
     "webpack-hot-middleware": "^2.20.0",
     "webpack-merge": "^4.1.1"
   },
-  "dependencies": {
-    "art-template": "^4.12.2"
-  }
+  "dependencies": {}
 }

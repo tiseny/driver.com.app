@@ -36,7 +36,7 @@ mui._ready(function() {
 			});
 			if (i > 0) {
 				sub.hide();
-			}else{
+			} else {
 				temp[subpages[i]] = "true";
 				mui.extend(aniShow,temp);
 			}
@@ -46,6 +46,8 @@ mui._ready(function() {
 	 //当前激活选项
 	let activeTab = subpages[0];
 	let title = document.getElementById("title");
+
+
 	 //选项卡点击事件
 	mui('.mui-bar-tab').on('tap', 'a', function(e) {
 		let targetTab = this.getAttribute('href');

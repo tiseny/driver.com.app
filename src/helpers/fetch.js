@@ -55,7 +55,7 @@ function fetch(url, params = {header: null, body: null}, method, hasToken = true
 	// 如果需要 token, 除了登录注册以外.
 	if (hasToken) {
 		Object.assign(headers, {
-			"token-sign": getState('token')
+			"ctp-token-sign": getState('token')
 		})
 	}
 		
@@ -72,21 +72,24 @@ function fetch(url, params = {header: null, body: null}, method, hasToken = true
 				if (data && data.Code === '000002') {
 					// 清楚所有存储的数据
 					clearState();
-
-					mui.openWindow({
-					  url: LOGIN_URL,
-					  id: LOGIN_URL,
-					  preload: true,
-						show: {
-							aniShow: 'pop-in'
-						},
-						styles: {
-							popGesture: 'hide'
-						},
-						waiting: {
-							autoShow: false
-						}
-					});
+					// 提醒
+					mui._toast(data.Msg)
+					setTimeout(() => {
+						mui.openWindow({
+						  url: LOGIN_URL,
+						  id: LOGIN_URL,
+						  preload: true,
+							show: {
+								aniShow: 'pop-in'
+							},
+							styles: {
+								popGesture: 'hide'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					},2000)
 				} else {
 					resolve({
 						result: true,
