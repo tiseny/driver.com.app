@@ -105,8 +105,34 @@ function pageBack(mui) {
 	};
 }
 
+function getQuery(mui,name) {
+  const str = location.search.replace('?', '');
+  const obj = {};
+  const arr = str.split('&');
+  const len = arr.length;
+
+  if (len > 0) {
+    for (let i = 0; i < len; i++) {
+      const tempArr = arr[i].split('=');
+      if (tempArr.length === 2) {
+        obj[tempArr[0]] = tempArr[1];
+      }
+    }
+  }
+
+  let queryValue = name ? obj[name] : obj
+  // 如果是支持plus
+  if (mui.os.plus) {
+  	queryValue = plus.webview.currentWebview()[name]
+  }
+
+  return queryValue
+}
 
 export {
+	getQuery,
+
+
 	pageBack,
 	goLogin,
 	watchLocation,
