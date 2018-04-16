@@ -5,8 +5,22 @@ import '../../redux/wait';
 import './wait.less';
 
 const template = require('../../libs/art.template');
+const DETAIL_URL = 'orderDetail.html'
 
 const task = {
+
+	listenForward: () => {
+		mui('#wait-mui-scroll').on('tap', '.orderRow', function(){
+			const id = this.getAttribute('data-id')
+			mui.openWindow({
+		    url:`${DETAIL_URL}?id=${id}`,
+		    id:DETAIL_URL,
+		    extras:{
+	        id
+		    }
+			});
+		})
+	},
 	// 获取 待解运单数据
 	fetchWaitList: () => {
 		mui.os.plus && plus.nativeUI.showWaiting('加载中...');
@@ -17,7 +31,7 @@ const task = {
 			mui('#wait-page').pullRefresh().endPulldownToRefresh();
 			if (json.result) {
 				document.getElementById('wait-mui-scroll').innerHTML = template('wait-template', {
-					list: json.data
+					list: [{Id:12121}]
 				});
 			}
 		})
@@ -36,7 +50,7 @@ mui.init({
       contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
       contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
       contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-      callback : task.fetchRecieveList //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+      callback : task.fetchWaitList //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
     }
   }
 });
@@ -46,6 +60,8 @@ mui.init({
 mui._ready(function() {
 
 	task.fetchWaitList()
+
+	task.listenForward()
 
 });
 

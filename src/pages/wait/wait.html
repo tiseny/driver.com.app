@@ -11,41 +11,49 @@
         <div class="mui-scroll" id="wait-mui-scroll">
           <script id="wait-template" type="text/html">
             {{if list.length > 0}}
-              <div class="title">&nbsp;</div>
-    		      <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
-    		      	<li class="mui-table-view-cell">
-                  <a class="mui-navigate-right">
-                  	<span class="name">承运单号</span>
-                    <span class="value">D201803-0007</span>
-                  </a>
-                </li>
-    		        <li class="mui-table-view-cell">
-    	            <div class="mui-table">
-                    <div class="mui-table-cell mui-col-xs-10">
-                    	<div class="row">
-                    		<span class="name">承运单号</span>
-                  		  <span class="value">D201803-0007</span> 
-                  		</div>
-                  		<div class="row">
-                    		<span class="name">承运单号</span>
-                  		  <span class="value">D201803-0007</span> 
-                  		</div>
-                  		<div class="row">
-                    		<span class="name">承运单号</span>
-                  		  <span class="value">D201803-0007</span> 
-                  		</div>
-                  		<div class="row">
-                    		<span class="name">承运单号</span>
-                  		  <span class="value">D201803-0007</span> 
-                  		</div>
-                  		<div class="row">
-                    		<span class="name">承运单号</span>
-                  		  <span class="value">D201803-0007</span> 
-                  		</div>
-                    </div>
-    	            </div>
-    		        </li>
-    		   	 	</ul>
+            {{each list as Item i}}
+            <div class="title">&nbsp;</div>
+  		      <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+  		      	<li class="mui-table-view-cell orderRow" data-id="{{Item.Id}}">
+                <a class="mui-navigate-right">
+                  <div>
+                    <span class="name">承运单号</span>
+                    <span class="value">D201803-0007</span>  
+                  </div>
+                	<div>
+                    <span class="name">承运单号</span>
+                    <span class="value">D201803-0007</span> 
+                  </div>
+                </a>
+              </li>
+  		        <li class="mui-table-view-cell">
+  	            <div class="mui-table">
+                  <div class="mui-table-cell mui-col-xs-10">
+                  	<div class="row">
+                  		<span class="name">承运单号</span>
+                		  <span class="value">D201803-0007</span> 
+                		</div>
+                		<div class="row">
+                  		<span class="name">承运单号</span>
+                		  <span class="value">D201803-0007</span> 
+                		</div>
+                		<div class="row">
+                  		<span class="name">承运单号</span>
+                		  <span class="value">D201803-0007</span> 
+                		</div>
+                		<div class="row">
+                  		<span class="name">承运单号</span>
+                		  <span class="value">D201803-0007</span> 
+                		</div>
+                		<div class="row">
+                  		<span class="name">承运单号</span>
+                		  <span class="value">D201803-0007</span> 
+                		</div>
+                  </div>
+  	            </div>
+  		        </li>
+  		   	 	</ul>
+            {{/each}}
             {{else}}
               <div class="nothing-box">
                 <div class="no-result">

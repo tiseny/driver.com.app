@@ -6,7 +6,23 @@ import './recieve.less';
 
 const template = require('../../libs/art.template');
 
+const DETAIL_URL = 'orderDetail.html'
+
 const task = {
+
+	listenForward: () => {
+		mui('#recieve-mui-scroll').on('tap', '.orderRow', function(){
+			const id = this.getAttribute('data-id')
+			mui.openWindow({
+		    url:`${DETAIL_URL}?id=${id}`,
+		    id:DETAIL_URL,
+		    extras:{
+	        id
+		    }
+			});
+		})
+	},
+
 	// 获取 待解运单数据
 	fetchRecieveList: () => {
 		mui.os.plus && plus.nativeUI.showWaiting('加载中...');
@@ -46,6 +62,8 @@ mui.init({
 mui._ready(function() {
 
 	task.fetchRecieveList()
+
+	task.listenForward()
 
 });
 
