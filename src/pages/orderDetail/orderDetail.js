@@ -7,6 +7,20 @@ import './orderDetail.less';
 const template = require('../../libs/art.template');
 
 const task = {
+	listenMobile: () => {
+		mui('body').on('tap', '.sys-mobile', function() {
+			const mobile = this.getAttribute('data-mobile')
+
+			callPhone(mobile);
+		})
+	},
+	listenAddress: () => {
+		mui('body').on('tap', '.sys-address', function() {
+			const address = this.getAttribute('data-address')
+
+			openMap(address)
+		})
+	},
 	// 获取 待解运单数据
 	fetchDetail: () => {
 		mui.os.plus && plus.nativeUI.showWaiting('加载中...');
@@ -15,11 +29,8 @@ const task = {
 		}).then(json => {
 			mui.os.plus && plus.nativeUI.closeWaiting();
 			mui('#orderDetail-page').pullRefresh().endPulldownToRefresh(); 
-			if (json.result) {
-				const html = template('orderDetail-template', {data: json.data});
-				document.getElementById('orderDetail-mui-scroll').innerHTML = html;
-				// 停止刷新页面
-			}
+			const html = template('orderDetail-template', {data: json.data});
+			document.getElementById('orderDetail-mui-scroll').innerHTML = html;
 		})
 	}
 }
@@ -46,6 +57,10 @@ mui.init({
 mui._ready(function() {
 
 	task.fetchDetail()
+
+	task.listenMobile()
+
+	task.listenAddress()
 
 });
 

@@ -5,7 +5,7 @@ import '../../redux/wait';
 import './wait.less';
 
 const template = require('../../libs/art.template');
-const DETAIL_URL = 'orderDetail.html'
+const DETAIL_URL = 'waitOrderDetail.html'
 
 const task = {
 
@@ -29,11 +29,9 @@ const task = {
 		}).then(json => {
 			mui.os.plus && plus.nativeUI.closeWaiting();
 			mui('#wait-page').pullRefresh().endPulldownToRefresh();
-			if (json.result) {
-				document.getElementById('wait-mui-scroll').innerHTML = template('wait-template', {
-					list: [{Id:12121}]
-				});
-			}
+			document.getElementById('wait-mui-scroll').innerHTML = template('wait-template', {
+				list: json.data
+			});
 		})
 	}
 }

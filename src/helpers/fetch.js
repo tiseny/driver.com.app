@@ -59,7 +59,7 @@ function fetch(url, params = {header: null, body: null}, method, hasToken = true
 			"ctp-token-sign": getState('token')
 		})
 	}
-		
+
 	return new Promise((resolve, reject) => {
 		mui.ajax(url, {
 			data: body,

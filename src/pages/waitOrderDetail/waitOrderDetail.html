@@ -6,10 +6,10 @@
 		<title><%= htmlWebpackPlugin.options.title %></title>
 	</head>
 	<body>
-		<div class="mui-content orderDetail-page">
-			<div class="mui-scroll-wrapper" id="orderDetail-page">
-		    <div class="mui-scroll" id="orderDetail-mui-scroll">
-          <script id="orderDetail-template" type="text/html">
+		<div class="mui-content waitOrderDetail-page">
+			<div class="mui-scroll-wrapper" id="waitOrderDetail-page">
+		    <div class="mui-scroll" id="waitOrderDetail-mui-scroll">
+          <script id="waitOrderDetail-template" type="text/html">
             {{if data && !!data.OrderNo}}
               <div class="title">&nbsp;</div>
               <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed"> 
@@ -133,6 +133,10 @@
                   </div>
                 </li>
               </ul>
+              <div class="footer-btn">
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="accept-btn" data-accept="true" data-id="{{data.Id}}">接单</button>
+                <button type="button" class="mui-btn mui-btn-danger mui-btn-block" id="refuse-btn" data-accept="false" data-id="{{data.Id}}">拒单</button>
+              </div>
             {{else}}
               <div class="nothing-box">
                 <div class="no-result">

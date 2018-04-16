@@ -79,8 +79,8 @@ function callPhone(number) {
 }
 
 // 打开系统地图，导航
-function openMap(mui) {
-
+function openMap(address) {
+	plus.maps.openSysMap();
 }
 
 // 拍照 

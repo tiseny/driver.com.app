@@ -31,11 +31,9 @@ const task = {
 		}).then(json => {
 			mui.os.plus && plus.nativeUI.closeWaiting();
 			mui('#recieve-page').pullRefresh().endPulldownToRefresh();
-			if (json.result) {
-				document.getElementById('recieve-mui-scroll').innerHTML = template('recieve-template', {
-					list: json.data
-				});
-			}
+			document.getElementById('recieve-mui-scroll').innerHTML = template('recieve-template', {
+				list: json.data
+			});
 		})
 	}
 }

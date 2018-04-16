@@ -18,11 +18,11 @@
                 <a class="mui-navigate-right">
                   <div>
                     <span class="name">承运单号</span>
-                    <span class="value">D201803-0007</span>  
+                    <span class="value">{{Item.OrderNo}}</span>  
                   </div>
                 	<div>
-                    <span class="name">承运单号</span>
-                    <span class="value">D201803-0007</span> 
+                    <span class="name">运费</span>
+                    <span class="value">{{Item.DriverFreight}} 元</span> 
                   </div>
                 </a>
               </li>
@@ -30,25 +30,46 @@
   	            <div class="mui-table">
                   <div class="mui-table-cell mui-col-xs-10">
                   	<div class="row">
-                  		<span class="name">承运单号</span>
-                		  <span class="value">D201803-0007</span> 
+                  		<span class="name">运单状态</span>
+                		  <span class="value">{{Item.OrderStatusName}}</span> 
                 		</div>
                 		<div class="row">
-                  		<span class="name">承运单号</span>
-                		  <span class="value">D201803-0007</span> 
+                  		<span class="name">到场时间</span>
+                		  <span class="value">{{Item.PresentTime}}</span> 
+                		</div>
+                    {{each Item.Factories as Factory key}}
+                      {{if Item.Factories.length == 1}}
+                        <div class="row">
+                          <span class="name">装货工厂</span>
+                          <span class="value">{{Factory.FactoryOr}}</span> 
+                        </div>
+                      {{else}}
+                        <div class="row">
+                          <span class="name">装货工厂{{key + 1}}</span>
+                          <span class="value">{{Factory.FactoryOr}}</span> 
+                        </div>
+                      {{/if}}
+                      <div class="row">
+                        <span class="name">装卸地址</span>
+                        <span class="value">{{Factory.FactoryAddress}}</span> 
+                      </div>
+                    {{/each}}  
+                		<div class="row">
+                  		<span class="name">贸易方式</span>
+                		  <span class="value">{{Item.TradeWayName}}</span> 
                 		</div>
                 		<div class="row">
-                  		<span class="name">承运单号</span>
-                		  <span class="value">D201803-0007</span> 
+                  		<span class="name">柜型</span>
+                		  <span class="value">{{Item.ArkOfName}}</span> 
                 		</div>
                 		<div class="row">
-                  		<span class="name">承运单号</span>
-                		  <span class="value">D201803-0007</span> 
+                  		<span class="name">提柜地</span>
+                		  <span class="value">{{Item.ContainerToName}}</span> 
                 		</div>
-                		<div class="row">
-                  		<span class="name">承运单号</span>
-                		  <span class="value">D201803-0007</span> 
-                		</div>
+                    <div class="row">
+                      <span class="name">还柜地</span>
+                      <span class="value">{{Item.AlsoArkToName}}</span> 
+                    </div>
                   </div>
   	            </div>
   		        </li>
