@@ -54,12 +54,12 @@ function watchLocation(mui) {
 	    	}
 	    	// address
 	    	//const address = `${position.address.province}${position.address.city}${position.address.district}${position.address.street}`
-	    	plus.nativeUI.toast(JSON.stringify(position))
+	    	//plus.nativeUI.toast(JSON.stringify(position))
 	    	// 清楚监听位置
 	    	plus.geolocation.clearWatch( geoWatch ); 
 	    	geoWatch = null
 	    }, function(e) {
-	      plus.nativeUI.toast("异常:" + e.message);
+	      //plus.nativeUI.toast("异常:" + e.message);
 	      // 清楚监听位置
 	      plus.geolocation.clearWatch( geoWatch ); 
 	    	geoWatch = null
@@ -75,7 +75,7 @@ function callPhone(number) {
 		if (e.index == 0) {
 			plus.device.dial(number, true)
 		}	
-	}, "nativeUI", ["是","否"])
+	}, "温馨提示", ["是","否"])
 }
 
 // 打开系统地图，导航
@@ -91,7 +91,7 @@ function photo(mui) {
 function pageBack(mui) {
 	// 退出
 	let backButtonPress = 0;
-	mui.back = function(event) {
+	mui._back = function(event) {
 		backButtonPress++;
 		if (backButtonPress > 1) {
 			plus.runtime.quit();
@@ -123,7 +123,8 @@ function getQuery(mui,name) {
   let queryValue = name ? obj[name] : obj
   // 如果是支持plus
   if (mui.os.plus) {
-  	queryValue = plus.webview.currentWebview()[name]
+  	const pw = plus.webview.currentWebview()
+  	queryValue = pw[name]
   }
 
   return queryValue
