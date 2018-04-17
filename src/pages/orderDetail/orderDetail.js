@@ -25,7 +25,7 @@ const task = {
 	fetchDetail: () => {
 		mui.os.plus && plus.nativeUI.showWaiting('加载中...');
 		app.orderDetail.fetchDetail({
-      id: getQuery(mui,'id')
+      id: getQuery(mui,'order_id')
 		}).then(json => {
 			mui.os.plus && plus.nativeUI.closeWaiting();
 			//mui('#orderDetail-page').pullRefresh().endPulldownToRefresh(); 

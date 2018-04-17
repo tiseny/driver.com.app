@@ -14,10 +14,10 @@ const task = {
 		mui('#history-mui-scroll').on('tap', '.orderRow', function(){
 			const id = this.getAttribute('data-id')
 			mui.openWindow({
-		    url:`${DETAIL_URL}?id=${id}`,
+		    url:`${DETAIL_URL}?order_id=${id}`,
 		    id: DETAIL_URL,
 		    extras:{
-	        id
+	        order_id:id
 		    }
 			});
 		})
@@ -27,10 +27,10 @@ const task = {
 		mui('#history-mui-scroll').on('tap', '.history-bottom', function(){
 			const id = this.getAttribute('data-id')
 			mui.openWindow({
-		    url:`${FEEDETAIL_URL}?id=${id}`,
+		    url:`${FEEDETAIL_URL}?order_id=${id}`,
 		    id: FEEDETAIL_URL,
 		    extras:{
-	        id
+	        order_id:id
 		    }
 			});
 		})
