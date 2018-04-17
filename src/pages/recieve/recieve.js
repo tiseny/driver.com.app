@@ -6,7 +6,7 @@ import './recieve.less';
 
 const template = require('../../libs/art.template');
 
-const DETAIL_URL = 'orderDetail.html'
+const DETAIL_URL = 'recieveOrderDetail.html'
 
 const task = {
 
@@ -14,10 +14,10 @@ const task = {
 		mui('#recieve-mui-scroll').on('tap', '.orderRow', function(){
 			const id = this.getAttribute('data-id')
 			mui.openWindow({
-		    url:`${DETAIL_URL}?id=${id}`,
+		    url:`${DETAIL_URL}?order_id=${id}`,
 		    id:DETAIL_URL,
 		    extras:{
-	        id
+	        order_id: id
 		    }
 			});
 		})
