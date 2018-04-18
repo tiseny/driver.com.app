@@ -130,9 +130,13 @@ function getQuery(mui,name) {
   return queryValue
 }
 
+// 图片预览
+function imagePreview() {
+
+}
+
 export {
 	getQuery,
-
 
 	pageBack,
 	goLogin,
@@ -140,5 +144,6 @@ export {
 	isLogin,
 	callPhone,
 	openMap,
-	photo
+	photo,
+	imagePreview
 }

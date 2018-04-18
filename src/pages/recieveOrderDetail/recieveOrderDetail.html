@@ -10,170 +10,172 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">运单详情</h1>
     </header>
-    <ul class="mui-table-view mui-grid-view mui-grid-9">
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
-          <span class="mui-icon mui-icon-home"></span>
-          <div class="mui-media-body">Home</div>
-        </a>
-      </li>
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
-          <span class="mui-icon mui-icon-home"></span>
-          <div class="mui-media-body">Home</div>
-        </a>
-      </li>
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
-          <span class="mui-icon mui-icon-home"></span>
-          <div class="mui-media-body">Home</div>
-        </a>
-      </li>
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
-          <span class="mui-icon mui-icon-home"></span>
-          <div class="mui-media-body">Home</div>
-        </a>
-      </li>
-    </ul>
-		<div class="mui-content recieveOrderDetail-page">
-			<div class="mui-scroll-wrapper" id="recieveOrderDetail-page">
-		    <div class="mui-scroll" id="recieveOrderDetail-mui-scroll">
-          <script id="recieveOrderDetail-template" type="text/html">
-            {{if data && !!data.OrderNo}}
-              <div class="title">&nbsp;</div>
-              <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed"> 
-                <li class="mui-table-view-cell">
-                  <div class="mui-table">
-                    <div class="mui-table-cell mui-col-xs-10">
-                      <div class="row full">
-                        <span class="name">运单号</span>
-                        <span class="value">{{data.OrderNo}}</span> 
-                      </div> 
-                      <div class="row full">
-                        <span class="name">运单状态</span>
-                        <span class="value">{{data.OrderStatusName}}</span>                                                   
-                      </div> 
-                      <div class="row full">
-                        <span class="name">到场时间</span>
-                        <span class="value">{{data.PresentTime}}</span> 
-                      </div>
-                      {{each data.Factories as Factory key}}
-                        {{if data.Factories.length == 1}}
-                          <div class="row">
-                            <span class="name">装货工厂</span>
-                            <span class="value">{{Factory.FactoryOr}}</span> 
-                          </div>
-                        {{else}}
-                          <div class="row">
-                            <span class="name">装货工厂{{key + 1}}</span>
-                            <span class="value">{{Factory.FactoryOr}}</span> 
-                          </div>
-                        {{/if}}
+    <div id="recieveOrderDetail-mui">
+    <script id="recieveOrderDetail-template" type="text/html">
+      <ul class="mui-table-view mui-grid-view mui-grid-9">
+        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 {{+data.OrderStatus >= 21 ? 'done' : ''}} {{+data.OrderStatus == 21 ? 'active' : ''}}" data-action="提柜确认" data-valid="{{+data.OrderStatus >= 21 ? 'true': 'false'}}" data-id="{{data.Id}}" data-mode="{{+data.OrderStatus == 21 ? 'add' : 'show'}}">
+          <a href="#">
+            <span class="mui-icon">提</span>
+            <div class="mui-media-body">提柜确认</div>
+          </a>
+        </li>
+        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 {{+data.OrderStatus >= 22 ? 'done' : ''}} {{+data.OrderStatus == 22 ? 'active' : ''}}" data-action="到场确认" data-valid="{{+data.OrderStatus >= 22 ? 'true': 'false'}}" data-id="{{data.Id}}" data-mode="{{+data.OrderStatus == 22 ? 'add' : 'show'}}">
+          <a href="#">
+            <span class="mui-icon ">到</span>
+            <div class="mui-media-body">到场确认</div>
+          </a>
+        </li>
+        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 {{+data.OrderStatus >= 23 ? 'done' : ''}} {{+data.OrderStatus == 23 ? 'active' : ''}}" data-action="离场确认" data-valid="{{+data.OrderStatus >= 23 ? 'true': 'false'}}" data-id="{{data.Id}}" data-mode="{{+data.OrderStatus == 23 ? 'add' : 'show'}}">
+          <a href="#">
+            <span class="mui-icon ">离</span>
+            <div class="mui-media-body">离场确认</div>
+          </a>
+        </li>
+        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 {{+data.OrderStatus >= 24 ? 'done' : ''}} {{+data.OrderStatus == 24 ? 'active' : ''}}" data-action="还柜确认" data-valid="{{+data.OrderStatus >= 24 ? 'true': 'false'}}" data-id="{{data.Id}}" data-mode="{{+data.OrderStatus == 24 ? 'add' : 'show'}}">
+          <a href="#">
+            <span class="mui-icon ">还</span>
+            <div class="mui-media-body">还柜确认</div>
+          </a>
+        </li>
+      </ul>
+      <div class="mui-content recieveOrderDetail-page">
+        <div class="mui-scroll-wrapper" id="recieveOrderDetail-page">
+          <div class="mui-scroll" >
+          {{if data && !!data.OrderNo}}
+            <div class="title">&nbsp;</div>
+            <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed"> 
+              <li class="mui-table-view-cell">
+                <div class="mui-table">
+                  <div class="mui-table-cell mui-col-xs-10">
+                    <div class="row full">
+                      <span class="name">运单号</span>
+                      <span class="value">{{data.OrderNo}}</span> 
+                    </div> 
+                    <div class="row full">
+                      <span class="name">运单状态</span>
+                      <span class="value">{{data.OrderStatusName}}</span>                                                   
+                    </div> 
+                    <div class="row full">
+                      <span class="name">到场时间</span>
+                      <span class="value">{{data.PresentTime}}</span> 
+                    </div>
+                    {{each data.Factories as Factory key}}
+                      {{if data.Factories.length == 1}}
                         <div class="row">
-                          <span class="name">联系人</span>
-                          <span class="value">{{Factory.ContactName}}</span> 
+                          <span class="name">装货工厂</span>
+                          <span class="value">{{Factory.FactoryOr}}</span> 
                         </div>
-                        <div class="row full arrow-right sys-mobile" data-mobile="{{Factory.LinkMobile}}">
-                          <span class="name">电话</span>
-                          <span class="value">{{Factory.LinkMobile}}</span> 
+                      {{else}}
+                        <div class="row">
+                          <span class="name">装货工厂{{key + 1}}</span>
+                          <span class="value">{{Factory.FactoryOr}}</span> 
                         </div>
-                        <div class="row full arrow-right sys-address" data-address="{{Factory.FactoryAddress}}">
-                          <span class="name">装卸地址</span>
-                          <span class="value">{{Factory.FactoryAddress}}</span> 
-                        </div>
-                      {{/each}}  
+                      {{/if}}
                       <div class="row">
-                        <span class="name">贸易方式</span>
-                        <span class="value">{{data.TradeWayName}}</span> 
+                        <span class="name">联系人</span>
+                        <span class="value">{{Factory.ContactName}}</span> 
                       </div>
-                      <div class="row">
-                        <span class="name">提柜地</span>
-                        <span class="value">{{data.ContainerToName}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">还柜地</span>
-                        <span class="value">{{data.ContainerToName}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">货重</span>
-                        <span class="value">{{data.GoodsWeight}} 千克</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">柜型</span>
-                        <span class="value">{{data.ArkOfName}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">报关方式</span>
-                        <span class="value">{{data.CustomsWayName}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">起运海关</span>
-                        <span class="value">{{data.CustomsDataName}}</span> 
-                      </div>
-                      <div class="row full">
-                        <span class="name">订舱号</span>
-                        <span class="value">{{data.BookingNum}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">封条号</span>
-                        <span class="value">{{data.SealNumber}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">柜号</span>
-                        <span class="value">{{data.SealNumber}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">过磅货重</span>
-                        <span class="value">{{data.WeighingWeight}} 千克</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">柜重</span>
-                        <span class="value">{{data.ArkHeavy}} 千克</span> 
-                      </div>
-                      <div class="row full">
-                        <span class="name">截关时间</span>
-                        <span class="value">{{data.CutOffTime}}</span> 
-                      </div>
-                      <div class="row full">
-                        <span class="name">补料时间</span>
-                        <span class="value">{{data.LoadingTime}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">提柜堆场</span>
-                        <span class="value">{{data.ContainerYardName}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">还柜堆场</span>
-                        <span class="value">{{data.AlsoTankDepotName}}</span> 
-                      </div>
-                      <div class="row">
-                        <span class="name">调度员</span>
-                        <span class="value">{{data.DispatcherName}}</span> 
-                      </div>
-                      <div class="row full arrow-right sys-mobile" data-mobile="{{data.DispartcherMobile}}">
+                      <div class="row full arrow-right sys-mobile" data-mobile="{{Factory.LinkMobile}}">
                         <span class="name">电话</span>
-                        <span class="value">{{data.DispartcherMobile}}</span> 
+                        <span class="value">{{Factory.LinkMobile}}</span> 
                       </div>
-                      <div class="row full">
-                        <span class="name">备注</span>
-                        <span class="value">{{data.OrderRemark}}</span> 
+                      <div class="row full arrow-right sys-address" data-address="{{Factory.FactoryAddress}}">
+                        <span class="name">装卸地址</span>
+                        <span class="value">{{Factory.FactoryAddress}}</span> 
                       </div>
+                    {{/each}}  
+                    <div class="row">
+                      <span class="name">贸易方式</span>
+                      <span class="value">{{data.TradeWayName}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">提柜地</span>
+                      <span class="value">{{data.ContainerToName}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">还柜地</span>
+                      <span class="value">{{data.ContainerToName}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">货重</span>
+                      <span class="value">{{data.GoodsWeight}} 千克</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">柜型</span>
+                      <span class="value">{{data.ArkOfName}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">报关方式</span>
+                      <span class="value">{{data.CustomsWayName}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">起运海关</span>
+                      <span class="value">{{data.CustomsDataName}}</span> 
+                    </div>
+                    <div class="row full">
+                      <span class="name">订舱号</span>
+                      <span class="value">{{data.BookingNum}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">封条号</span>
+                      <span class="value">{{data.SealNumber}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">柜号</span>
+                      <span class="value">{{data.SealNumber}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">过磅货重</span>
+                      <span class="value">{{data.WeighingWeight}} 千克</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">柜重</span>
+                      <span class="value">{{data.ArkHeavy}} 千克</span> 
+                    </div>
+                    <div class="row full">
+                      <span class="name">截关时间</span>
+                      <span class="value">{{data.CutOffTime}}</span> 
+                    </div>
+                    <div class="row full">
+                      <span class="name">补料时间</span>
+                      <span class="value">{{data.LoadingTime}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">提柜堆场</span>
+                      <span class="value">{{data.ContainerYardName}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">还柜堆场</span>
+                      <span class="value">{{data.AlsoTankDepotName}}</span> 
+                    </div>
+                    <div class="row">
+                      <span class="name">调度员</span>
+                      <span class="value">{{data.DispatcherName}}</span> 
+                    </div>
+                    <div class="row full arrow-right sys-mobile" data-mobile="{{data.DispartcherMobile}}">
+                      <span class="name">电话</span>
+                      <span class="value">{{data.DispartcherMobile}}</span> 
+                    </div>
+                    <div class="row full">
+                      <span class="name">备注</span>
+                      <span class="value">{{data.OrderRemark}}</span> 
                     </div>
                   </div>
-                </li>
-              </ul>
-            {{else}}
-              <div class="nothing-box">
-                <div class="no-result">
-                  <i class="iconfont icon-wushuju"></i>  
                 </div>
-                <p>暂时没有内容 ~ ~</p>
+              </li>
+            </ul>
+          {{else}}
+            <div class="nothing-box">
+              <div class="no-result">
+                <i class="iconfont icon-wushuju"></i>  
               </div>
-            {{/if}}
-          </script>
+              <p>暂时没有内容 ~ ~</p>
+            </div>
+          {{/if}}
+          </div>
         </div>
-			</div>
-		</div>
+      </div>
+    </script>
+    </div>
 	</body>
 </html>

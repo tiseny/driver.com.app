@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title><%= htmlWebpackPlugin.options.title %></title>
+	</head>
+	<body >
+    <div id="orderProcess-page">
+    <script id="orderProcess-template" type="text/html">
+    <header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title" id="title">
+        {{title}}
+
+        {{if mode == 'add'}}
+        <span class="mui-icon mui-icon-compose"></span>
+        {{/if}}
+      </h1>
+    </header>
+		<div class="mui-content orderProcess-page">
+      <form class="mui-input-group">
+        {{if title == '提柜确认'}}
+        <div class="mui-input-row">
+          <label>订舱号</label>
+          {{if mode == 'show'}}
+          <input type="text" value="{{data.BookingNum}}" class="mui-input-clear mui-input" disabled>
+          {{else}}
+          <input type="text" value="{{data.BookingNum}}" class="mui-input-clear mui-input" placeholder="请输入订舱号">
+          {{/if}}
+        </div>
+        <div class="mui-input-row">
+          <label>序号</label>
+          {{if mode == 'show'}}
+          <input type="text" value="{{data.SerialNumOfBookingNum}}" class="mui-input-clear  mui-input" disabled >
+          {{else}}
+          <input type="text" value="{{data.SerialNumOfBookingNum}}" class="mui-input-clear  mui-input" placeholder="请输入序号">
+          {{/if}}
+        </div>
+        <div class="mui-input-row">
+          <label>柜号</label>
+          {{if mode == 'show'}}
+          <input type="text" value="{{data.TankNo}}" class="mui-input-clear mui-input" disabled>
+          {{else}}
+          <input type="text" value="{{data.TankNo}}" class="mui-input-clear mui-input" placeholder="请输入柜号">
+          {{/if}}
+        </div>
+        <div class="mui-input-row">
+          <label>封条号</label>
+          {{if mode == 'show'}}
+          <input type="text" value="{{data.SealNumber}}" class="mui-input-clear mui-input" disabled>
+          {{else}}
+          <input type="text" value="{{data.SealNumber}}" class="mui-input-clear mui-input" placeholder="请输入封条号">
+          {{/if}}
+        </div>
+        <div class="mui-input-row unit">
+          <label>柜重量</label>
+          {{if mode == 'show'}}
+          <input type="text" value="{{data.ArkHeavy}}" class="mui-input-clear mui-input" disabled>
+          {{else}}
+          <input type="text" value="{{data.ArkHeavy}}" class="mui-input-clear mui-input" placeholder="请输入柜重量">
+          {{/if}}
+          <span class="mui-input-unit">千克</span>
+        </div>
+        <div class="mui-input-row camera">
+          <label>柜后门</label>
+          <span class="mui-icon mui-icon-camera"></span>
+        </div>
+        <div class="mui-input-row img-preview-wrap">
+          {{if mode == 'add'}}
+          <div class="image-box">
+            <div class="image-box-inner plus">
+              <span class="mui-icon mui-icon-plusempty"></span>    
+            </div>
+          </div>
+          {{/if}}
+          <div class="image-box">
+            <div class="image-box-inner">
+              <img class="mui-media-object" src="{{data.Attachs[0]}}">  
+            </div>
+          </div>
+        </div>
+        <div class="mui-input-row camera">
+          <label>封条</label>
+          <span class="mui-icon mui-icon-camera"></span>
+        </div>
+        <div class="mui-input-row img-preview-wrap">
+          {{if mode == 'add'}}
+          <div class="image-box">
+            <div class="image-box-inner plus">
+              <span class="mui-icon mui-icon-plusempty"></span>    
+            </div>
+          </div>
+          {{/if}}
+          <div class="image-box">
+            <div class="image-box-inner">
+              <img class="mui-media-object" src="{{data.Attachs[1]}}">  
+            </div>
+          </div>
+        </div>
+        {{/if}}
+      </form>
+      {{if mode == 'add'}}
+      <button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="sure-btn">确定</button>
+      {{/if}}
+		</div>
+    </script>
+    </div>
+    <div id="fix-popup">
+      <div class="image-view-wrap">
+        <img class="mui-media-object" src="http://image2.wlwulian.com/group1/2018/3/31/039db664007ed1324647bc16acb64bb9.jpg">
+      </div>
+      <div class="image-options">
+        <a href="#">删除</a>
+      </div>
+      <div class="popup-backdrop"></div>
+    </div>
+    
+	</body>
+</html>
