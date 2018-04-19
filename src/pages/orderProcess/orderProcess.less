@@ -3,6 +3,11 @@
 .orderProcess-page{
 	margin: 15px;
 	.mui-input-row{
+		> label .require{
+			color: #f30;
+	    margin-left: -11px;
+	    margin-right: 5px;
+		}
 		&.unit{
 			padding-right: 50px;
 			.mui-input-unit{
@@ -29,15 +34,15 @@
 		}
 		&.camera{
 			padding-right: 50px;
-			.mui-icon-camera{
+			.mui-icon-close{
 				position: absolute;
 		    top: 0;
 		    right: 0;
 		    width: 50px;
 		    line-height: 40px;
 		    text-align: center;
-		    font-size: 30px;
-		    color: #999;
+		    font-size: 24px;
+		    color: #007aff;
 			}
 		}
 		&.img-preview-wrap{
@@ -63,7 +68,6 @@
 			    flex-direction: column;
 			    align-items: center;
 			    justify-content: center;
-			    background: rgba(158, 158, 158, .5);
 			    &.plus{
 			    	background: none;
 			    	border: 1px solid #e4e2e2;

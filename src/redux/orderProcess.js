@@ -13,5 +13,13 @@ window.app.orderProcess = {
 				resolve(json)
 			})
 		})
-	}		
+	},
+
+	upaloadImage: params => {
+		return new Promise((resolve, reject) => {
+			fetch(config.apiList.orderContainerImage, {header: params}, 'post').then(json => {
+				resolve(json)
+			})
+		})
+	}
 }

@@ -1,3 +1,4 @@
+import '../libs/fastclick';
 import { pageBack, watchLocation, isLogin, goLogin } from './util';
 
 Number.prototype.formatMoney = function(places, symbol, thousand, decimal) {

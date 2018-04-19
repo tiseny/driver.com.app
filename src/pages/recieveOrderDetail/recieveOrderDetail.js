@@ -23,8 +23,8 @@ const task = {
 			const order_id = this.getAttribute('data-id')
 			const isvalid = this.getAttribute('data-valid')
 			const mode = this.getAttribute('data-mode')
-
-			if (isvalid) {
+			
+			if (isvalid == 'true') {
 				mui.openWindow({
 			    url:`${FORWARD_URL}?order_id=${order_id}&action=${action}&mode=${mode}`,
 			    id: FORWARD_URL,
