@@ -6,10 +6,27 @@
 		<title><%= htmlWebpackPlugin.options.title %></title>
 	</head>
 	<body>
-		<div class="mui-content">
-			<div class="title">
-				这是feeDetail页面
-			</div>
+		<div class="mui-content detail-page" id="feeDetail-page">
+			<div class="mui-scroll-wrapper" id="fee-mui-scroll">
+				<script id="fee-template" type="text/html"> 
+		    	<div class="mui-scroll">
+	          <div class="title">&nbsp;</div>
+	            <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+	            	{{each list as Item i}}
+	              <li class="mui-table-view-cell orderRow" id="fee-text" >
+	                <span class="fee-CostItemName fee-left">{{Item.CostItemName}}</span>
+	                <span class="fee-price fee-right">{{Item.Price}}</span>
+	              </li>
+	              {{/each}}
+	              <li class="mui-table-view-cell orderRow fee-sum" >
+	              	<span class="fee-left">总额(元)</span>
+	              	<span class="fee-right" style="color:#ff0033">{{total}}</span>
+	              </li>
+	          	</ul>
+	    			</div>
+					</div>
+				</script>	
+			</div>	
 		</div>
 	</body>
 </html>
