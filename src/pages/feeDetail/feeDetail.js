@@ -13,8 +13,6 @@ const task = {
 		app.fee.fetchFee({
 			id: getQuery(mui,'order_id')
 		}).then(json => {
-			//test
-			console.log(json)
 			//费用总金额
 			let total = 0;
 			json.data.forEach(item => {

@@ -50,7 +50,7 @@ body{
 }
 
 
-#fix-popup{
+.fix-popup{
 	position: fixed;
   z-index: 1000;
   top: 0;
@@ -80,12 +80,17 @@ body{
     bottom: 0;
     right: 0;
     left: 0;
-    padding: 0 10px;
     height: 50px;
     line-height: 50px;
     color: #fff;
     text-align: right;
     z-index: 3;
+
+    .opt-btn{
+    	display: inline-block;
+    	line-height: 50px;
+    	padding: 0 20px;
+    }
   }
 
   .popup-backdrop{
