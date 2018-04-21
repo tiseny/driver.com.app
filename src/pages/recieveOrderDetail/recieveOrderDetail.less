@@ -2,12 +2,14 @@
 
 .ui-page-recieveOrderDetail{
 	#recieveOrderDetail-mui{
-		overflow: hidden;
+		overflow: auto;
+		margin-top: 44px;
 	}
 	.mui-table-view {
 		font-size: 14px;
-    margin: 0 10px;
+    margin: 10px;
 		.mui-table-view-cell {
+			line-height: 21px;
 			.row {
   			padding: 3px 0;
 				overflow: hidden;
@@ -56,7 +58,6 @@
 	}
 	.mui-table-view.mui-grid-view {
 		width: auto;
-		margin-top: 60px;
 		background: #fff;
 		&.mui-grid-9 {
 			border-top-color: #d6d3d3;
@@ -117,8 +118,8 @@
 						background-color: #007aff;
 						&.mask{
 							background: rgba(0, 122, 255, .3);
-							-webkit-animation:flash 2s .2s linear infinite;
 							animation:flash 2s .2s linear infinite;
+							-webkit-animation:flash 2s .2s linear infinite;
 						}	
 					}
 					.back-line{
@@ -137,6 +138,6 @@
 }
 
 @-webkit-keyframes flash{
-	0%,100%{transform: scale(1.5);}
-	50%{transform: scale(1);}
+	0%,100%{-webkit-transform: scale(1.5);}
+	50%{-webkit-transform: scale(1);}
 }

@@ -1,5 +1,5 @@
 import mui from '../../helpers/middleware';
-import { pageBack, getQuery, callPhone, openMap } from '../../helpers/util';
+import { getQuery, callPhone, openMap } from '../../helpers/util';
 import { setState, getState } from '../../helpers/state';
 import '../../redux/orderDetail';
 import './recieveOrderDetail.less';
@@ -89,7 +89,3 @@ mui._ready(function() {
 	task.listenForward()
 
 });
-
-
-// 退出
-pageBack(mui);

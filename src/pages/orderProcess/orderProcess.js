@@ -1,5 +1,5 @@
 import mui from '../../helpers/middleware';
-import { pageBack, getQuery, imagePreview, photo } from '../../helpers/util';
+import { getQuery, imagePreview, photo } from '../../helpers/util';
 import { setState, getState } from '../../helpers/state';
 import '../../redux/orderProcess';
 import './orderProcess.less';
@@ -44,19 +44,22 @@ const task = {
 			const index = this.getAttribute('data-index');
 			const type = this.getAttribute('data-type');
 			
-			photo((path, base64) => {
-				/*fetch.upaloadImage.call(this, {
+			photo((path, base64, bitdata) => {
+				app.orderProcess.upaloadImage({
 		      orderId: getQuery(mui, 'order_id'),
-		      businessKey: 
-		    }, json => {
+		      businessKey: IMG_KEY['柜后门'],
+		      data: bitdata
+		    }).then(json => {
 		      // 如果成功
 		      if (json.result) {
-		       
+		       	console.log(json)
+		       	task.state.pageData[field][index] = base64
+						render(task.state.pageData)
 		      }
-		    })*/
+		    })
 		    // 清空本地的图片路径
-				task.state.pageData[field][index] = path
-				render(task.state.pageData)
+				//task.state.pageData[field][index] = base64
+				//render(task.state.pageData)
 				//console.log(path, base64)
 			})
 		})
@@ -134,7 +137,3 @@ mui._ready(function() {
 	task.deleteImage();
 
 });
-
-
-// 退出
-pageBack(mui);

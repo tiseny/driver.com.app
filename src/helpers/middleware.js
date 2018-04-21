@@ -57,6 +57,9 @@ function middleware() {
 	// 定位信息
 	watchLocation(mui);
 
+	// 退出
+	pageBack(mui)
+
 	return mui
 }
 

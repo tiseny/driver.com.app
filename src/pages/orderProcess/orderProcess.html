@@ -10,12 +10,8 @@
       <script id="orderProcess-template" type="text/html">
       <header class="mui-bar mui-bar-nav">
         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-        <h1 class="mui-title" id="title">
+        <h1 class="mui-title">
           {{title}}
-
-          {{if mode == 'add'}}
-          <span class="mui-icon mui-icon-compose"></span>
-          {{/if}}
         </h1>
       </header>
   		<div class="mui-content orderProcess-page">
@@ -56,15 +52,15 @@
           <div class="mui-input-row unit">
             <label><i class="require">*</i>柜重量</label>
             {{if mode == 'show'}}
-            <input type="number" value="{{data.ArkHeavy}}" class="mui-input-clear mui-input" disabled>
+            <input type="number" step="0.001" value="{{data.ArkHeavy}}" class="mui-input-clear mui-input" disabled>
             {{else}}
-            <input type="number" value="{{data.ArkHeavy}}" class="mui-input-clear mui-input" placeholder="请输入柜重量">
+            <input type="number" step="0.001" value="{{data.ArkHeavy}}" class="mui-input-clear mui-input" placeholder="请输入柜重量">
             {{/if}}
             <span class="mui-input-unit">千克</span>
           </div>
           <div class="mui-input-row camera">
             <label><i class="require">*</i>柜后门</label>
-            {{if  data.Attachs[0] && mode == 'add'}}
+            {{if !!data.Attachs[0] && mode == 'add'}}
             <span class="mui-icon mui-icon-close" data-field="Attachs" data-index="0" data-type="柜后门"></span>
             {{/if}}
           </div>
@@ -76,15 +72,17 @@
               </div>
             </div>
             {{/if}}
+            {{if !!data.Attachs[0]}}
             <div class="image-box">
               <div class="image-box-inner image" data-src="{{data.Attachs[0]}}" data-mode="{{mode}}" data-field="Attachs" data-index="0">
                 <img class="mui-media-object" src="{{data.Attachs[0]}}">  
               </div>
             </div>
+            {{/if}}
           </div>
           <div class="mui-input-row camera">
             <label><i class="require">*</i>封条</label>
-            {{if data.Attachs[1] && mode == 'add'}}
+            {{if !!data.Attachs[1] && mode == 'add'}}
             <span class="mui-icon mui-icon-close" data-field="Attachs" data-index="1"></span>
             {{/if}}
           </div>
@@ -96,11 +94,13 @@
               </div>
             </div>
             {{/if}}
+            {{if !!data.Attachs[1]}}
             <div class="image-box">
               <div class="image-box-inner image" data-src="{{data.Attachs[1]}}" data-mode="{{mode}}" data-field="Attachs" data-index="1">
                 <img class="mui-media-object" src="{{data.Attachs[1]}}">  
               </div>
             </div>
+            {{/if}}
           </div>
           {{/if}}
         </form>
