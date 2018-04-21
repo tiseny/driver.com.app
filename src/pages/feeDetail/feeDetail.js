@@ -6,9 +6,10 @@ import './feeDetail.less';
 
 const template = require('../../libs/art.template')
 
+
 const task = {
 	//获取费用数据
-	fetchFee:() => {
+	fetchFeeDetail:() => {
 		app.fee.fetchFee({
 			id: getQuery(mui,'order_id')
 		}).then(json => {
@@ -19,7 +20,8 @@ const task = {
 			})
 			const html = template('fee-template', {
 				list: json.data,
-				total: Number(total).formatMoney()
+				total: Number(total).formatMoney(),
+				OrderStatus: getQuery(mui,'OrderStatus')
 			});		
 			document.getElementById('fee-mui-scroll').innerHTML = html;
 		})
@@ -36,7 +38,7 @@ mui.init({
 // 调用h5 plus的事件系统
 mui._ready(function() {
 
-	task.fetchFee()
+	task.fetchFeeDetail()
 	
 });
 

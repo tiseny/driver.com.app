@@ -25,11 +25,13 @@ const task = {
 	listenFee: () => {
 		mui('#history-mui-scroll').on('tap', '.history-bottom', function(){
 			const id = this.getAttribute('data-id')
+			const OrderStatus = this.getAttribute('data-OrderStatus')
 			mui.openWindow({
-		    url:`${FEEDETAIL_URL}?order_id=${id}`,
+		    url:`${FEEDETAIL_URL}?order_id=${id}&OrderStatus=${OrderStatus}`,
 		    id: FEEDETAIL_URL,
 		    extras:{
-	        order_id:id
+	        order_id:id,
+	        OrderStatus:OrderStatus
 		    }
 			});
 		})
@@ -41,6 +43,7 @@ const task = {
 			pageIndex: 1,
       pageSize: 5
 		}).then(json => {
+			console.log(json)
 			//mui('#history-page').pullRefresh().endPulldownToRefresh(); 
 			document.getElementById('history-mui-scroll').innerHTML = template('history-template', {
 				list:json.data.Data
