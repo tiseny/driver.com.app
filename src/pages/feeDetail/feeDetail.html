@@ -6,6 +6,10 @@
 		<title><%= htmlWebpackPlugin.options.title %></title>
 	</head>
 	<body>
+		<header class="mui-bar mui-bar-nav">
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <h1 class="mui-title">运单详情</h1>
+    </header>
 		<div class="mui-content detail-page" id="feeDetail-page">
 			<div class="mui-scroll-wrapper" id="fee-mui-scroll">
 				<script id="fee-template" type="text/html"> 
@@ -13,7 +17,7 @@
 	          <div class="title">&nbsp;</div>
 	          {{if OrderStatus == 25}}
 	          <!-- 录入费用 -->
-	          <div class="feeDetail-add">加一笔</div>
+	          <button class="feeDetail-add">加一笔</button>
 	          <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
               <li class="mui-table-view-cell orderRow" id="fee-text" >
                 <span class="fee-CostItemName fee-left">xx费</span>

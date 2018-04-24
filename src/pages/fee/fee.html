@@ -7,12 +7,11 @@
 	</head>
 	<body>
 		<div class="mui-content">
-			<div class="mui-content-padded" style="margin: 5px;">
-				<div class="mui-input-row mui-search">
-					<input type="search" class="mui-input-clear" placeholder="请输入承运单号">
-				</div>
+			<div class="search" style="display:flex;">
+				<input type="text" class="fee-search-input" id="search_input">
+				<button type="button" class="fee-search-btn" id="search_btn">查询</button>
 			</div>
-			<div fee-continer>
+			<div class="fee-continer">
 				<table>
 					<thead>
 				    <tr class="fee-row">
@@ -22,18 +21,28 @@
 				      <th>运费总额</th>
 				    </tr>
   				</thead>
-  				<tbody>
-  					<tr class="fee-row">
-  						<td>2018-4-14</td>
-  						<td>中堂镇</td>
-  						<td>D201804-0006</td>
-  						<td>123270</td>
-  					</tr>
+  				<tbody id="fee-mui-scroll">
+  					<script id="fee-template" type="text/html">
+	  					{{each data as arr i}}
+	  					<tr class="fee-row">
+	  						<td>{{arr.PresentTime}}</td>
+	  						<td>{{arr.FullName}}</td>
+	  						<td class="orderRow" data-id="{{arr.OrderId}}">
+	  						<a style="color: #1929e2" class="tbody-OrderNo" id="tbody-OrderNo">{{arr.OrderNo}}</a>
+	  						</td>
+	  						<td class="feeRow" data-id="{{arr.OrderId}}">
+	  						<a style="color: #1929e2" class="tbody-fee">{{arr.Amount}}</a>
+	  						</td>
+	  					</tr>
+	  					{{/each}}
+  					</script>
   				</tbody>
   				<tfoot>
   					<tr class="fee-row">
-  						<td>合计:</td>
-  						<td>123,270.00</td>
+  						<td style="border-right-color: transparent;"></td>
+  						<td style="border-right-color: transparent;"></td>
+  						<td class="fee-total">合计:</td>
+  						<td style="color: #f30" id="total">0</td>
   					</tr>
   				</tfoot>
 				</table>

@@ -48,7 +48,6 @@ const task = {
 			//mui('#history-page').pullRefresh().endPulldownToRefresh(); 
 			document.getElementById('history-mui-scroll').innerHTML = template('history-template', {
 				list:json.data.Data
-				
 			});
 		})
 	}

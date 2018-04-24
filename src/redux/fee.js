@@ -3,7 +3,7 @@ import fetch from '../helpers/fetch';
 import { setState, getState } from '../helpers/state';
 
 window.app = window.app || {}
-window.app.checkSheet = {
+window.app.fee = {
 	//获取费用数据
 	checkSheet: params => {
 		return new Promise((resolve,reject) => {

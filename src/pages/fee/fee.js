@@ -4,18 +4,65 @@ import { setState, getState } from '../../helpers/state';
 import '../../redux/fee';
 import './fee.less';
 
+const DETAIL_URL = 'orderDetail.html'
+const FEEDETAIL_URL = 'feeDetail.html'
+
+const template = require('../../libs/art.template');
 
 const task = {
-	fetchFee:() => {
-		app.checkSheet.checkSheet({
+	listenSearch: () => {
+		document.getElementById("search_btn").addEventListener("tap",function(){
+	  	let value = document.getElementById("search_input").value
+	  	console.log(value)
+		});
+	},
+	listenForward: () => {
+		mui('#fee-mui-scroll').on('tap', '.orderRow', function(){
+			const id = this.getAttribute('data-id')
+			mui.openWindow({
+		    url:`${DETAIL_URL}?order_id=${id}`,
+		    id: DETAIL_URL,
+		    extras:{
+	        order_id:id
+		    }
+			});
+		})
+	},
+	
+	listenFee: () => {
+		mui('#fee-mui-scroll').on('tap', '.feeRow', function(){
+			const id = this.getAttribute('data-id')
+			const OrderStatus = this.getAttribute('data-OrderStatus')
+			mui.openWindow({
+		    url:`${FEEDETAIL_URL}?order_id=${id}`,
+		    id: FEEDETAIL_URL,
+		    extras:{
+	        order_id:id
+		    }
+			});
+		})
+	},
 
+	fetchFee:(value) => {
+		app.fee.checkSheet({
+			orderNo:value 
 		}).then(json => {
 			console.log(json)
-			const html = template('orderDetail-template', {data: json.data});
-			document.getElementById('orderDetail-mui-scroll').innerHTML = html;
+			//费用总金额
+			let total = 0;
+			json.data.forEach(data => {
+				total += +data.Amount
+			})
+			const html = template('fee-template', {
+				data: json.data
+			});
+			document.getElementById('fee-mui-scroll').innerHTML = html;
+			document.getElementById('total').innerHTML =  Number(total).formatMoney()
 		})
 	}
-}	
+}
+
+
 
 
 // ios 导航状态
@@ -30,6 +77,11 @@ mui._ready(function() {
 
 	task.fetchFee()
 
+	task.listenForward()
+
+	task.listenFee()
+
+	task.listenSearch();
 });
 
 

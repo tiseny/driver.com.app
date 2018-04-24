@@ -6,11 +6,15 @@ import './feeDetail.less';
 
 const template = require('../../libs/art.template')
 
+//费用选择
+hidden:false;
+const extraCategory = []
+
 
 const task = {
 	//获取费用数据
 	fetchFeeDetail:() => {
-		app.fee.fetchFee({
+		app.feeDetail.fetchFee({
 			id: getQuery(mui,'order_id')
 		}).then(json => {
 			//费用总金额
@@ -25,7 +29,16 @@ const task = {
 			});		
 			document.getElementById('fee-mui-scroll').innerHTML = html;
 		})
-	}	
+	},
+	//获取费用种类数据
+	fetchFeeCategory:() =>{
+		app.feeDetail.feeCategory({
+
+		}).then(json => {
+			console.log(json)
+			feeList:json.data
+		})
+	}
 }
 
 // ios 导航状态
@@ -39,6 +52,9 @@ mui.init({
 mui._ready(function() {
 
 	task.fetchFeeDetail()
+
+	task.fetchFeeCategory()
+
 	
 });
 
