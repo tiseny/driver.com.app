@@ -1,5 +1,4 @@
 import mui from '../../helpers/middleware';
-import { pageBack } from '../../helpers/util';
 import { setState, getState } from '../../helpers/state';
 import '../../redux/history';
 import './history.less';
@@ -80,5 +79,3 @@ mui._ready(function() {
 	task.listenFee()
   
 });
-// 退出
-pageBack(mui);

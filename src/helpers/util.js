@@ -87,13 +87,14 @@ function openMap(address) {
 
 // 拍照 
 function photo(callback) {
-	const cmr = plus.camera.getCamera();  
+	const cmr = plus.camera.getCamera(); 
 	cmr.captureImage(function(p) {  
   //alert(p);//_doc/camera/1467602809090.jpg  
   	plus.io.resolveLocalFileSystemURL(p, function(entry) {  
 		  //alert(entry.toLocalURL());//file:///storage/emulated/0/Android/data/io.dcloud...../doc/camera/1467602809090.jpg  
 		  //alert(entry.name);//1467602809090.jpg  
-	   	compressImage(entry.toLocalURL(), entry.name, callback)
+		  const path = plus.io.convertLocalFileSystemURL(p)
+	   	compressImage(path, entry, callback)
 	  }, function(e) {  
 	   	plus.nativeUI.toast("读取拍照文件错误：" + e.message);  
 	  });  
@@ -105,36 +106,53 @@ function photo(callback) {
 } 
 
 //压缩图片  
-function compressImage(url,filename, callback){  
- 	const name = `_doc/upload/${filename}`;//_doc/upload/F_ZDDZZ-1467602809090.jpg  
+function compressImage(url, file, callback){  
+ 	const name = `_doc/upload/${file.name}`;//_doc/upload/F_ZDDZZ-1467602809090.jpg  
 	plus.zip.compressImage({  
    	src:url,//src: (String 类型 )压缩转换原始图片的路径  
    	dst:name,//压缩转换目标图片的路径  
    	quality:20,//quality: (Number 类型 )压缩图片的质量.取值范围为1-100  
    	overwrite:true//overwrite: (Boolean 类型 )覆盖生成新文件  
-  },function(event) {   
+  }, function(event) {  
    	//uploadf(event.target,pid);  
-   	const path = name;//压缩转换目标图片的路径  
    	//event.target获取压缩转换后的图片url路  
    	//filename图片名称  
-   	let img = new Image();
-		img.src = event.target;
-		img.onload = function() {
-			// 获取旋转的角度
-			EXIF.getData(image, function() {
-				const imgProps = EXIF.getAllTags(this)
-	    	callback(event.target, getBase64Image(img, imgProps.Orientation+""))  
+	 	let img = new Image();
+		img.src = url;
+		img.onload = function () {
+			let that = this
+	    //获取照片方向角属性，用户旋转控制 ,判断当前图片是否需要做旋转操作。
+	    EXIF.getData(img, function() {  
+	      /**
+	       * 图片的旋转方向信息
+	       * 1、图片没有发生旋转
+	       * 6、顺时针90°
+	       * 8、逆时针90°
+	       * 3、180° 旋转
+	       */
+		    let base64 = getBase64Image(that, EXIF.getTag(this, 'Orientation'))
+		    let bitData = base64.replace("data:image/png;base64,", "") 
+		    callback(file.name, base64, bitData)
+		    // 删除文件
+		    file.remove(function() {
+		    	console.log('删除成功')
+		    }, function() {
+					console.log('删除失败')    	
+		    });
 	    });
 		}
+		
   },function(error) {  
   	plus.nativeUI.toast("压缩图片失败")
- 	});  	
+ 	}); 
 }  
 
 
 // 获取 base64 图片数据
 //将图片压缩转成base64
 function getBase64Image(img, orientation) {
+	let width = img.width;
+	let height = img.height;
 	// 1 - 0度
 	// 6 - 90度
 	// 8 - -90度
@@ -147,28 +165,23 @@ function getBase64Image(img, orientation) {
 	} 
 	//绘制图形
 	const canvas = document.createElement("canvas");
-	let width = img.width;
-	let height = img.height;
-	// 这里对图片大于300*400的进行压缩
-	if(width > height) {
-		if(width > 300) {
-			height = Math.round(height *= 300 / width);
-			width = 300;
-		}
-	} else {
-		if(height > 400) {
-			width = Math.round(width *= 400 / height);
-			height = 400;
-		}
-	}
-	canvas.width = width; /*设置新的图片的宽度*/
-	canvas.height = height; /*设置新的图片的长度*/
 	const ctx = canvas.getContext("2d");
-	ctx.rotate(ANGEL[orientation] * Math.PI / 180); //把画布旋转90度
+	canvas.width = width;  /*设置新的图片的宽度*/
+	canvas.height = height; /*设置新的图片的长度*/
+	if (orientation == '6') {
+		// 旋转大小
+		canvas.width = height;  
+		canvas.height = width; 
+
+  	ctx.translate(height, 0);
+    //清空画布指定像素
+    ctx.clearRect(-width, -height, width, height); 
+	  // 画布旋转 90度
+		ctx.rotate(ANGEL[orientation] * Math.PI / 180); //把画布旋转90度	
+		ctx.fillRect(width, height, width, height);
+	}
 	ctx.drawImage(img, 0, 0, width, height); /*绘图*/
-	let dataURL = canvas.toDataURL("image/png", 0.5);
-	
-	return dataURL.replace("data:image/png;base64,", "");
+	return canvas.toDataURL("image/jpeg", 0.5);
 }
 
 

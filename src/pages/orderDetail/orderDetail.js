@@ -1,5 +1,5 @@
 import mui from '../../helpers/middleware';
-import { pageBack, getQuery } from '../../helpers/util';
+import { getQuery } from '../../helpers/util';
 import { setState, getState } from '../../helpers/state';
 import '../../redux/orderDetail';
 import './orderDetail.less';
@@ -65,5 +65,3 @@ mui._ready(function() {
 });
 
 
-// 退出
-pageBack(mui);

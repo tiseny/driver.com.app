@@ -1,12 +1,14 @@
 @import url('../../static/common.less');
 
 .orderProcess-page{
-	margin: 15px;
+	margin: 15px 0;
 	.mui-input-row{
-		> label .require{
-			color: #f30;
-	    margin-left: -11px;
-	    margin-right: 5px;
+		> label {
+			.require{
+				color: #f30;
+		    margin-left: -11px;
+		    margin-right: 5px;
+			}
 		}
 		&.unit{
 			padding-right: 50px;
@@ -17,6 +19,7 @@
 				width: 50px;
 				text-align: center;
 				line-height: 40px;
+				font-size: 14px;
 				border-left: 1px solid #dedde0;
 			}
 
@@ -72,7 +75,7 @@
 			    	background: none;
 			    	border: 1px solid #e4e2e2;
 			    	.mui-icon{
-			    		color: #999;
+			    		color: #ccc;
 			    		font-size: 40px;
 			    	}
 			    }
@@ -81,6 +84,7 @@
 		}
 	}	
 	#sure-btn{
-		margin-top: 30px;
+		margin: 30px 15px;
+		width: calc(~"100% - 30px");
 	}
 }

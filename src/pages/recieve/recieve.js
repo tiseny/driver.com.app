@@ -1,5 +1,4 @@
 import mui from '../../helpers/middleware';
-import { pageBack } from '../../helpers/util';
 import { setState, getState } from '../../helpers/state';
 import '../../redux/recieve';
 import './recieve.less';
@@ -66,5 +65,3 @@ mui._ready(function() {
 });
 
 
-// 退出
-pageBack(mui);

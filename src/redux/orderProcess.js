@@ -17,7 +17,14 @@ window.app.orderProcess = {
 
 	upaloadImage: params => {
 		return new Promise((resolve, reject) => {
-			fetch(config.apiList.orderContainerImage, {header: params}, 'post').then(json => {
+			const header = {
+				orderId: params.orderId,
+				businessKey: params.businessKey
+			}
+			const body = {
+				[params.businessKey] : params.data
+			}
+			fetch(config.apiList.orderContainerImage, {header, body}, 'post').then(json => {
 				resolve(json)
 			})
 		})

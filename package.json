@@ -1,7 +1,7 @@
 {
   "name": "driver.com.app",
   "version": "1.0.0",
-  "description": "webpack gulp es6 multiple",
+  "description": "webpack  es6 multiple",
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node build/dev-server.js",

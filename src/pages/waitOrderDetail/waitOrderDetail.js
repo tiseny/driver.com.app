@@ -72,7 +72,7 @@ const task = {
 			mui.os.plus && plus.nativeUI.closeWaiting();
 			//mui('#waitOrderDetail-page').pullRefresh().endPulldownToRefresh(); 
 			const html = template('waitOrderDetail-template', {data: json.data});
-			document.getElementById('waitOrderDetail-mui-scroll').innerHTML = html;
+			document.getElementById('waitOrderDetail-page').innerHTML = html;
 		})
 	}
 }

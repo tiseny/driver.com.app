@@ -1,5 +1,4 @@
 import mui from '../../helpers/middleware';
-import { pageBack } from '../../helpers/util';
 import '../../redux/login';
 import './login.less';
 
@@ -51,8 +50,5 @@ mui._ready(function() {
 
 	// 登录时间
 	task.login()
-
 });
 
-
-pageBack(mui);
