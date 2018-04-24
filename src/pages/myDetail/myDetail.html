@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html class="ui-page-myDetail">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="myDetail-mui">
+        <script id="myDetail-template" type="text/html">
+            <header class="mui-bar mui-bar-nav">
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+                <h1 class="mui-title">{{title}}</h1>
+            </header>
+            <div class="mui-content myDetail-page">
+                {{if id==='myInfo-part'}}
+                <section id="myInfo-part">
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">登录账号
+                            <article class="article-right">{{data.Id}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">姓名
+                            <article class="article-right">{{data.DriverName}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">身份证号
+                            <article class="article-right">{{data.IdNumber}}</article>
+                        </li>
+                    </ul>
+                </section>
+                {{/if}}
+                {{if id==='car-part'}}
+                <section id="car-part">
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">车牌号
+                            <article class="article-right">{{data.LicensePlateNumber}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">驾驶证有效期
+                            <article class="article-right">
+                                <span class="mui-badge mui-badge-danger">已过期</span>
+                                <span>{{data.CertValidity}}</span>
+                            </article>
+                        </li>
+                        <li class="mui-table-view-cell">车头登记日期
+                            <article class="article-right">{{data.CarChassis_OperationCertificateIsValid}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">车架登记日期
+                                <article class="article-right">{{data.CarFrame_DrivingLicenseNo}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">司机本登记日期
+                            <article class="article-right">{{data.DriverCertificate}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">从业资格证有效期
+                            <article class="article-right">{{data.JobCertValidity}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">行驶证有效期
+                            <article class="article-right">{{data.CarFrame_DrivingLicenseNo}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">交强险有效期
+                            <article class="article-right">{{data.CarChassis_ValidityOfInsurance}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">商业险有效期
+                            <article class="article-right">{{data.CarChassis_ValidityOfBusinessRisk}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">二级维护有效期
+                            <article class="article-right">{{data.CarChassis_Level2MaintenancePeriodOfValidity}}</article>
+                        </li>
+                        <li class="mui-table-view-cell">GPS有效期
+                            <article class="article-right">{{data.CarChassis_GPSValidity}}</article>
+                        </li>
+                    </ul>
+                </section>
+                {{/if}}
+                {{if id==='evaluate-part'}}
+                <section id="evaluate-part">
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">好评数（
+                            <span style="color: #3a0">+2</span>分）
+                            <article class="article-right">
+                                <span style="color: #3a0">0</span>个
+                            </article>
+                        </li>
+                        <li class="mui-table-view-cell">中评数（
+                            <span>+1</span>分）
+                            <article class="article-right">
+                                <span>0</span>个
+                            </article>
+                        </li>
+                        <li class="mui-table-view-cell">差评数（
+                            <span style="color: #f30">-1</span>分）
+                            <article class="article-right">
+                                <span style="color: #f30">0</span>个
+                            </article>
+                        </li>
+                    </ul>
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">平均分
+                            <article class="article-right">
+                                <span>0</span>
+                            </article>
+                        </li>
+                    </ul>
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">总分值
+                            <article class="article-right">
+                                <span>0</span>
+                            </article>
+                        </li>
+                    </ul>
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">运单总数
+                            <article class="article-right">
+                                <span>0</span>
+                            </article>
+                        </li>
+                    </ul>
+                </section>
+                {{/if}}
+                {{if id==='passUpdate-part'}}
+                <section id="passUpdate-part">
+                    <div class="mui-input-group">
+                        <div class="mui-input-row">
+                            <label>原密码</label>
+                            <input type="text" class="mui-input-clear" placeholder="请输入用户名">
+                        </div>
+                        <div class="mui-input-row">
+                            <label>新密码</label>
+                            <input type="password" class="mui-input-clear mui-input-password" placeholder="请输入密码">
+                        </div>
+                        <div class="mui-input-row">
+                            <label>确认密码</label>
+                            <input type="password" class="mui-input-clear mui-input-password" placeholder="请输入确认密码">
+                        </div>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="submit" class="mui-btn mui-btn-success mui-btn-block">确定</button>
+                    </div>
+                </section>
+                {{/if}}
+            </div>
+        </script>
+    </div>
+</body>
+
+</html>
