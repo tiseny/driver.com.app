@@ -7,11 +7,22 @@ import './feeDetail.less';
 const template = require('../../libs/art.template')
 
 //费用选择
-hidden:false;
 const extraCategory = []
-
+//费用录入费用列表
+const add_feeList = []
 
 const task = {
+	//状态
+	state: {
+		hidden:0
+	},
+	//监听加一笔按钮显示复选框
+	ListenerAddFee: () => {
+		mui('#fee-mui-scroll').on('tap', '#add_feeList', function(){
+			console.log("123")
+		})
+	},
+
 	//获取费用数据
 	fetchFeeDetail:() => {
 		app.feeDetail.fetchFee({
@@ -25,7 +36,9 @@ const task = {
 			const html = template('fee-template', {
 				list: json.data,
 				total: Number(total).formatMoney(),
-				OrderStatus: getQuery(mui,'OrderStatus')
+				OrderStatus: getQuery(mui,'OrderStatus'),
+				hidden: task.state.hidden,
+				extraCategory:extraCategory
 			});		
 			document.getElementById('fee-mui-scroll').innerHTML = html;
 		})
@@ -35,8 +48,14 @@ const task = {
 		app.feeDetail.feeCategory({
 
 		}).then(json => {
-			console.log(json)
-			feeList:json.data
+			//获取的费用种类做处理=>过滤作用
+			for(var i = 0;i<json.data.length;i++){
+				if(json.data[i].Category == 3){
+					feeList:json.data
+					extraCategory.push(json.data[i])
+				}
+			}
+			console.log(extraCategory)
 		})
 	}
 }
@@ -55,6 +74,6 @@ mui._ready(function() {
 
 	task.fetchFeeCategory()
 
-	
+	task.ListenerAddFee()
 });
 

@@ -10,10 +10,11 @@ const FEEDETAIL_URL = 'feeDetail.html'
 const template = require('../../libs/art.template');
 
 const task = {
+
 	listenSearch: () => {
 		document.getElementById("search_btn").addEventListener("tap",function(){
-	  	let value = document.getElementById("search_input").value
-	  	console.log(value)
+	  	let value = document.getElementById("search_input").value;
+	  	task.fetchFee(value);
 		});
 	},
 	listenForward: () => {
@@ -47,7 +48,6 @@ const task = {
 		app.fee.checkSheet({
 			orderNo:value 
 		}).then(json => {
-			console.log(json)
 			//费用总金额
 			let total = 0;
 			json.data.forEach(data => {
@@ -81,7 +81,7 @@ mui._ready(function() {
 
 	task.listenFee()
 
-	task.listenSearch();
+	task.listenSearch()
 });
 
 
