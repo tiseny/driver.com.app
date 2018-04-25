@@ -9,10 +9,24 @@ window.app.myDetail = {
 	//  获取 信息 列表
 	fetchDetail: params => {
 		return new Promise((resolve, reject) => {
-			fetch(`${config.apiList.trailer}/${params.id}`, null, 'get').then(json => {
-				console.log(json)
-				resolve(json)
-			})
+			fetch(`${config.apiList.trailer}/${params.id}`, null, 'get')
+				.then(json => {
+					// console.log(json)
+					resolve(json)
+				})
 		})
-	}	
+	},
+
+	//获取评论
+	fetchEvaluate: params => {
+		return new Promise((resolve, reject) => {
+			fetch(`${config.apiList.evaluate}/${params.id}`, null, 'get')
+				.then(json => {
+					// console.log(json)
+					resolve(json)
+				}).catch(err=>{
+					console.log(err)
+				})
+		})
+	}
 }

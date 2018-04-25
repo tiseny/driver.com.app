@@ -24,7 +24,6 @@ const task = {
 		mui('.mui-table-view').on('tap', '.mui-table-view-cell', function () {
 			const id = this.getAttribute('data-id')
 			const title = this.childNodes[0].innerText
-			// console.log(title)
 			mui.openWindow({
 				url: `${DETAIL_URL}?part_id=${id}&part_title=${title}`,
 				id: DETAIL_URL,
