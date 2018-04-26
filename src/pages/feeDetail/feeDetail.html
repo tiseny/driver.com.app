@@ -11,15 +11,15 @@
       <h1 class="mui-title">运单详情</h1>
     </header>
 		<div class="mui-content detail-page" id="feeDetail-page">
-			<div class="mui-scroll-wrapper" id="fee-mui-scroll">
-				<script id="fee-template" type="text/html"> 
+			<div class="mui-scroll-wrapper" id="feeDetail-mui-scroll">
+				<script id="feeDetail-template" type="text/html"> 
 		    	<div class="mui-scroll">
 	          <div class="title">&nbsp;</div>
 	          {{if OrderStatus == 25}}
 	          <!-- 录入费用 -->
 	          <button class="feeDetail-add" id="add_feeList">加一笔</button>
 	          <!-- 录入费用from提交 -->
-	          <form action="" method="post" class="form">
+	          <div class="form">
 		          <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 	              <li class="mui-table-view-cell">
 	              	<a class="mui-navigate-right add_feeList_a">压夜费<input type="text" class="add_feeList_input"></a>
@@ -29,9 +29,9 @@
 	              	<span class="fee-right" style="color:#ff0033">{{total}}</span>
 	              </li>
 	          	</ul>
-	          	<input type="submit" value="提交" class="submit" />
-	          	<input type="button" value="取消" class="submit" />
-          	</form>
+          		<input type="button" value="提交" class="from_submit" />
+          		<input type="button" value="取消" class="from_cancel" id="from_cancel" />
+          	</div>
 	          {{else}}
 	          <!-- 查看费用 -->
 	          <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
@@ -47,14 +47,16 @@
               </li>
           	</ul>
 	    			{{/if}}
-	    			{{if hidden == 1}}
-	    			<div>这是费用选择</div>
+	    			{{if hidden == 0}}
+	    			<div class="addFee_checkbox">
 	    			{{each extraCategory as Item i}}
-	    			<div class="mui-input-row mui-checkbox mui-left">
-						  <label>{{Item.CostName}}</label>
-						  <input name="checkbox1" value="Item 1" type="checkbox">
-						</div>
+		    			<div class="mui-input-row mui-checkbox mui-left">
+							  <label>{{Item.CostName}}</label>
+							  <input value="{{Item.CostName}}" type="checkbox">
+							</div>
 						{{/each}}
+							<button class="addFee_btn">确认</button>
+						</div>
 	    			{{/if}}
 					</div>
 				</script>	

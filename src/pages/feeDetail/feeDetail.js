@@ -10,6 +10,8 @@ const template = require('../../libs/art.template')
 const extraCategory = []
 //费用录入费用列表
 const add_feeList = []
+//点击取消跳转到history
+const HISTORY_URL = 'history.html'
 
 const task = {
 	//状态
@@ -18,8 +20,10 @@ const task = {
 	},
 	//监听加一笔按钮显示复选框
 	ListenerAddFee: () => {
-		mui('#fee-mui-scroll').on('tap', '#add_feeList', function(){
-			console.log("123")
+		mui('#feeDetail-mui-scroll').on('tap', '#add_feeList', function(){
+			
+			task.state.hidden=1;
+			console.log(task.state.hidden);
 		})
 	},
 
@@ -33,14 +37,14 @@ const task = {
 			json.data.forEach(item => {
 				total += +item.Amount
 			})
-			const html = template('fee-template', {
+			const html = template('feeDetail-template', {
 				list: json.data,
 				total: Number(total).formatMoney(),
 				OrderStatus: getQuery(mui,'OrderStatus'),
 				hidden: task.state.hidden,
 				extraCategory:extraCategory
 			});		
-			document.getElementById('fee-mui-scroll').innerHTML = html;
+			document.getElementById('feeDetail-mui-scroll').innerHTML = html;
 		})
 	},
 	//获取费用种类数据
@@ -56,9 +60,19 @@ const task = {
 				}
 			}
 			console.log(extraCategory)
+			console.log(task.state.hidden)
+		})
+	},
+	//监听取消按钮，点击实现跳转到history页面
+	listenCencel: () => {
+		mui('#feeDetail-mui-scroll').on('tap', '#from_cancel', function(){
+			mui.openWindow({
+		    url:`${HISTORY_URL}`
+			});
 		})
 	}
 }
+	
 
 // ios 导航状态
 mui.init({
@@ -70,10 +84,12 @@ mui.init({
 // 调用h5 plus的事件系统
 mui._ready(function() {
 
-	task.fetchFeeDetail()
-
 	task.fetchFeeCategory()
 
+	task.fetchFeeDetail()
+
 	task.ListenerAddFee()
+
+	task.listenCencel()
 });
 
